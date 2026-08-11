@@ -192,7 +192,13 @@ export async function markdownToPdf(markdownText, title = 'AI Response', options
 
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',   // important on low-memory containers
+    '--disable-gpu',
+    '--single-process',
+  ]
   });
   try {
     const page = await browser.newPage();
