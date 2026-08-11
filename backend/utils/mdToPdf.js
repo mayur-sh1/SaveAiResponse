@@ -192,17 +192,23 @@ export async function markdownToPdf(markdownText, title = 'AI Response', options
 
   const browser = await puppeteer.launch({
     headless: 'new',
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',   // important on low-memory containers
-    '--disable-gpu',
-    '--single-process',
-  ]
+    protocolTimeout: 120000,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--disable-software-rasterizer',
+    ],
   });
+
   try {
     const page = await browser.newPage();
-    await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
+
+    page.on('error', (err) => console.error('Page crashed:', err));
+    page.on('pageerror', (err) => console.error('Page JS error:', err));
+
+    await page.setContent(fullHtml, { waitUntil: 'networkidle0', timeout: 30000 });
 
     const pdfOptions = {
       format: 'A4',
