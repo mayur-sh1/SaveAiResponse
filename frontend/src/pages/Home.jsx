@@ -1,8 +1,15 @@
 import './Home.css';
+import { Helmet } from 'react-helmet-async';
 
 export default function Home({ onConvertClick }) {
   return (
+    
     <div className="page">
+      <Helmet>
+        <title>SaveAiResponse — Turn AI Chat Responses into Custom PDFs</title>
+        <meta name="description" content="Copy any AI response in markdown, paste it in, and export a custom-styled PDF, DOCX, or HTML in seconds." />
+      </Helmet>
+      
       {/* Header */}
       <header className="header">
         <div className="logo">

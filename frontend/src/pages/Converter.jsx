@@ -171,6 +171,10 @@ export default function Converter({ onBack }) {
 
   return (
     <div className="converter-page">
+      <Helmet>
+  <title>Convert Markdown to PDF — SaveAiResponse</title>
+  <meta name="description" content="Paste markdown, pick a theme, font, and color palette, and download as PDF, DOCX, or HTML." />
+</Helmet>
       <header className="converter-header">
         <div className="header-left">
           <button className="back-link" onClick={onBack}>← Back</button>
